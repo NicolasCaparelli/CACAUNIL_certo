@@ -1,4 +1,4 @@
-const CACHE = 'cacaunil-v3';
+const CACHE = 'cacaunil-v4';
 
 self.addEventListener('install', e => {
   self.skipWaiting();
