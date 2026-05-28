@@ -690,12 +690,16 @@ function renderFin(){
 // ── VENDAS
 function abrirModalVenda(){
   vendaItens=[];
-  ['v-cliente','v-pago'].forEach(x=>document.getElementById(x).value='');
-  document.getElementById('v-data').value=hoje();
-  document.getElementById('v-status-pag').className='status-pag';
-  document.getElementById('v-total-display').textContent='R$ 0,00';
-  adicionarItemVenda();
-  abrirModal('modal-venda');
+  db.ref('estoque').once('value', snap => {
+    estoque = snap.val() || {};
+    ['v-cliente','v-pago'].forEach(x=>document.getElementById(x).value='');
+    document.getElementById('v-data').value=hoje();
+    document.getElementById('v-status-pag').className='status-pag';
+    document.getElementById('v-status-pag').textContent='';
+    document.getElementById('v-total-display').textContent='R$ 0,00';
+    adicionarItemVenda();
+    abrirModal('modal-venda');
+  });
 }
 function adicionarItemVenda(){
   vendaItens.push({saborId:'',qtd:1});
